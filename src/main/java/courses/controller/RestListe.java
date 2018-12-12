@@ -1,10 +1,15 @@
-package courses.bean;
+package courses.controller;
+
+import courses.bean.Item;
+
+import java.util.List;
 
 public class RestListe {
 
     private Long id;
     private String nom;
     private boolean template;
+    private List<Item> items;
 
     public boolean isTemplate() {
         return template;
@@ -28,5 +33,13 @@ public class RestListe {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 }

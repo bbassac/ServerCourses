@@ -2,6 +2,7 @@ package courses.repository;
 
 import courses.LogUtils;
 import courses.bean.Collection;
+import courses.bean.Item;
 import courses.bean.Liste;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -77,6 +78,17 @@ public class CollectionRepositoryImpl implements CollectionRepositoryCustom {
         }
         return getCollection();
     }
+
+    @Override
+    public Liste addItemToList(Long listId, Item item) {
+        LogUtils.warn("Adding item to  liste "+ listId);
+        Liste l =getListe(listId);
+        l.addItem(item);
+        item.setListe(l);
+        entityManager.persist(l);
+        return l;
+    }
+
 
     private void createEmptyCollection() {
         LogUtils.warn("Creating empty collection");

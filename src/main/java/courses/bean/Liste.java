@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import courses.controller.RestListe;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -27,19 +28,14 @@ public class Liste {
     @Column(name="template",nullable = false)
     private boolean template;
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "liste", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OrderBy("NOM ASC")
+    private List<Item> items;
 
-
+    @JsonBackReference
     @ManyToOne
     private Collection collection;
-
-    public Liste(RestListe l) {
-        this.id = l.getId();
-        this.nom = l.getNom();
-        this.template = l.isTemplate();
-    }
-
-
-
 
     // Mus have no-argument constructor
     public Liste() {
@@ -49,6 +45,12 @@ public class Liste {
     public Liste(String nom) {
         this.nom = nom;
 
+    }
+
+    public Liste(RestListe list) {
+        this.setId(list.getId());
+        this.setNom(list.getNom());
+        this.setTemplate(list.isTemplate());
     }
 
 
@@ -83,5 +85,20 @@ public class Liste {
 
     public void setCollection(Collection collection) {
         this.collection = collection;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public void addItem(Item item) {
+        if(items == null){
+            items = new ArrayList<Item>();
+        }
+        items.add(item);
     }
 }

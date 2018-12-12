@@ -3,6 +3,7 @@ package courses.bean;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import courses.controller.RestItem;
 
 
 import javax.persistence.*;
@@ -23,6 +24,20 @@ public class Item implements Comparable {
     private String nom;
     @Column(name = "QUANTITE")
     private String quantite;
+
+    @ManyToOne
+    @JsonBackReference
+    private Liste liste;
+
+    public Item(RestItem item) {
+        this.id = item.getId();
+        this.nom = item.getNom();
+        this.quantite= item.getQuantite();
+        this.done = item.isDone();
+    }
+
+    @Column(name="DONE",nullable = false)
+    private boolean done = false;
 
 
     public Long getId() {
@@ -64,5 +79,21 @@ public class Item implements Comparable {
     @Override
     public int compareTo(Object o) {
         return this.getId().compareTo(((Item) o).getId());
+    }
+
+    public Liste getListe() {
+        return liste;
+    }
+
+    public void setListe(Liste liste) {
+        this.liste = liste;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
     }
 }

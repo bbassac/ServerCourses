@@ -1,6 +1,7 @@
 package courses.repository;
 
 import courses.bean.Collection;
+import courses.bean.Item;
 import courses.bean.Liste;
 
 /**
@@ -19,4 +20,6 @@ public interface CollectionRepositoryCustom {
     Liste getListe(Long id);
 
     Collection update(Liste list);
+
+    Liste addItemToList(Long listId, Item item);
 }

@@ -2,7 +2,6 @@ package courses.controller;
 
 import courses.bean.Collection;
 import courses.bean.Liste;
-import courses.bean.RestListe;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,19 +20,19 @@ public class ListeController extends AbstractController{
     @CrossOrigin
     @RequestMapping(value = "/",method = RequestMethod.POST)
     @ResponseBody
-    public Collection addListe(@RequestBody RestListe l) {
-        Liste list = new Liste(l);
+    public Collection addListe(@RequestBody RestListe list) {
         list.setId(null);
-        return customRepo.ajouterListe(list);
+        Liste l = new Liste(list);
+        return customRepo.ajouterListe(l);
     }
 
 
     @CrossOrigin
     @RequestMapping(value = "/",method = RequestMethod.PUT)
     @ResponseBody
-    public Collection updateList(@RequestBody RestListe l) {
-        Liste list = new Liste(l);
-        return customRepo.update(list);
+    public Collection updateList(@RequestBody RestListe list) {
+        Liste l = new Liste(list);
+        return customRepo.update(l);
     }
 
     @CrossOrigin
