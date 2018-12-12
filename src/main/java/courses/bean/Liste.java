@@ -12,19 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "SERIE")
+@Table(name = "LISTE")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Liste {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "NOM")
+    @Column(name = "NOM",nullable = false)
     private String nom;
-    @Column(name = "FINI")
+
+    @Column(name="template",nullable = false)
+    private boolean template;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(nullable = true)
     @JsonManagedReference
     private List<Item> items;
@@ -33,7 +35,29 @@ public class Liste {
     @JsonBackReference
     private Collection collection;
 
-    // Must have no-argument constructor
+    public Liste(RestListe l) {
+        this.nom = l.getNom();
+        this.template = l.isTemplate();
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public Collection getCollection() {
+        return collection;
+    }
+
+    public void setCollection(Collection collection) {
+        this.collection = collection;
+    }
+
+
+    // Mus have no-argument constructor
     public Liste() {
 
     }
@@ -61,6 +85,11 @@ public class Liste {
     }
 
 
+    public boolean isTemplate() {
+        return template;
+    }
 
-
+    public void setTemplate(boolean template) {
+        this.template = template;
+    }
 }

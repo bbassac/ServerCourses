@@ -43,4 +43,11 @@ public class Collection {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public void addListe(Liste l) {
+        if(listes == null){
+            listes= new ArrayList<Liste>();
+        }
+        listes.add(l);
+    }
 }

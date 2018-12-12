@@ -11,7 +11,7 @@ import javax.persistence.*;
  * Created by b.bassac on 12/01/2015.
  */
 @Entity
-@Table(name = "BD")
+@Table(name = "ITEM")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Item implements Comparable {
     @Id
@@ -19,7 +19,7 @@ public class Item implements Comparable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NOM")
+    @Column(name = "NOM",nullable = false)
     private String nom;
     @Column(name = "QUANTITE")
     private String quantite;
