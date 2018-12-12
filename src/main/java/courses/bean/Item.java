@@ -25,10 +25,6 @@ public class Item implements Comparable {
     private String quantite;
 
 
-    @ManyToOne
-    @JsonBackReference
-    private Liste liste;
-
     public Long getId() {
         return id;
     }
@@ -53,13 +49,6 @@ public class Item implements Comparable {
         this.quantite = quantite;
     }
 
-    public Liste getListe() {
-        return liste;
-    }
-
-    public void setListe(Liste liste) {
-        this.liste = liste;
-    }
 
     public Item() {
     }

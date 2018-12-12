@@ -17,4 +17,6 @@ public interface CollectionRepositoryCustom {
     Collection effacerListe(Long l);
 
     Liste getListe(Long id);
+
+    Collection update(Liste list);
 }

@@ -23,7 +23,17 @@ public class ListeController extends AbstractController{
     @ResponseBody
     public Collection addListe(@RequestBody RestListe l) {
         Liste list = new Liste(l);
+        list.setId(null);
         return customRepo.ajouterListe(list);
+    }
+
+
+    @CrossOrigin
+    @RequestMapping(value = "/",method = RequestMethod.PUT)
+    @ResponseBody
+    public Collection updateList(@RequestBody RestListe l) {
+        Liste list = new Liste(l);
+        return customRepo.update(list);
     }
 
     @CrossOrigin

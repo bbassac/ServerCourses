@@ -41,7 +41,7 @@ public class CollectionRepositoryImpl implements CollectionRepositoryCustom {
         Collection c =getCollection();
         c.addListe(l);
         l.setCollection(c);
-        entityManager.persist(l);
+        entityManager.persist(c);
         return getCollection();
     }
 
@@ -52,6 +52,7 @@ public class CollectionRepositoryImpl implements CollectionRepositoryCustom {
             LogUtils.warn("Deleting liste id "+ id);
             dbListe.getCollection().getListes().remove(dbListe);
             entityManager.remove(dbListe);
+            entityManager.merge(dbListe.getCollection());
         }else{
             LogUtils.warn("Liste id "+ id + " Not found");
         }
@@ -63,6 +64,18 @@ public class CollectionRepositoryImpl implements CollectionRepositoryCustom {
         LogUtils.warn("Looking for liste id "+ id );
         Liste dbListe = entityManager.find(Liste.class,id);
         return dbListe;
+    }
+
+    @Override
+    public Collection update(Liste list) {
+        if(list.getId()!= null){
+            LogUtils.warn("Updating list id "+ list.getId() );
+            Liste dbList = getListe(list.getId());
+            dbList.setNom(list.getNom());
+            dbList.setTemplate(list.isTemplate());
+            entityManager.merge(dbList);
+        }
+        return getCollection();
     }
 
     private void createEmptyCollection() {

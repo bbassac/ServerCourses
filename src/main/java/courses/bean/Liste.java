@@ -8,6 +8,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,41 +21,24 @@ public class Liste {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "NOM",nullable = false)
+    @NotEmpty
     private String nom;
 
     @Column(name="template",nullable = false)
     private boolean template;
 
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinColumn(nullable = true)
-    @JsonManagedReference
-    private List<Item> items;
+
 
     @ManyToOne
-    @JsonBackReference
     private Collection collection;
 
     public Liste(RestListe l) {
+        this.id = l.getId();
         this.nom = l.getNom();
         this.template = l.isTemplate();
     }
 
-    public List<Item> getItems() {
-        return items;
-    }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
-
-    public Collection getCollection() {
-        return collection;
-    }
-
-    public void setCollection(Collection collection) {
-        this.collection = collection;
-    }
 
 
     // Mus have no-argument constructor
@@ -64,7 +48,7 @@ public class Liste {
 
     public Liste(String nom) {
         this.nom = nom;
-        items = new ArrayList<>();
+
     }
 
 
@@ -91,5 +75,13 @@ public class Liste {
 
     public void setTemplate(boolean template) {
         this.template = template;
+    }
+
+    public Collection getCollection() {
+        return collection;
+    }
+
+    public void setCollection(Collection collection) {
+        this.collection = collection;
     }
 }
