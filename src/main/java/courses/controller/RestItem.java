@@ -10,7 +10,7 @@ public class RestItem {
     private String nom;
     private String quantite;
     private Long listId;
-    
+
     private boolean done = false;
 
     public Long getId() {

@@ -67,6 +67,13 @@ public class CollectionRepositoryImpl implements CollectionRepositoryCustom {
         return dbListe;
     }
 
+
+    public Item getItem(Long id) {
+        LogUtils.warn("Looking for liste id "+ id );
+        Item dbItem = entityManager.find(Item.class,id);
+        return dbItem;
+    }
+
     @Override
     public Collection update(Liste list) {
         if(list.getId()!= null){
@@ -87,6 +94,21 @@ public class CollectionRepositoryImpl implements CollectionRepositoryCustom {
         item.setListe(l);
         entityManager.persist(l);
         return l;
+    }
+
+    @Override
+    public Liste removeItemToList(Long listId, Item i) {
+
+        Item dbItem = getItem(i.getId());
+        if(dbItem !=null){
+            LogUtils.warn("Deleting item id "+ i.getId());
+            dbItem.getListe().getItems().remove(dbItem);
+            entityManager.remove(dbItem);
+            entityManager.merge(dbItem.getListe());
+        }else{
+            LogUtils.warn("Item  "+ i.getId() + " from list " + listId + " Not found");
+        }
+        return getListe(listId);
     }
 
 

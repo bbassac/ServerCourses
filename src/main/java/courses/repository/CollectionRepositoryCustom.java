@@ -22,4 +22,6 @@ public interface CollectionRepositoryCustom {
     Collection update(Liste list);
 
     Liste addItemToList(Long listId, Item item);
+
+    Liste removeItemToList(Long listId, Item i);
 }

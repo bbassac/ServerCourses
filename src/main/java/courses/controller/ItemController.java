@@ -19,5 +19,12 @@ public class ItemController extends AbstractController{
         return customRepo.addItemToList(item.getListId(), i);
     }
 
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.DELETE)
+    @ResponseBody
+    public Liste removeItemsFromList(@RequestBody RestItem item) {
+        Item i = new Item(item);
+        return customRepo.removeItemToList(item.getListId(), i);
+    }
 
 }
