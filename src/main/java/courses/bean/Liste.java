@@ -22,7 +22,6 @@ public class Liste {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "NOM",nullable = false)
-    @NotEmpty
     private String nom;
 
     @Column(name="template",nullable = false)
