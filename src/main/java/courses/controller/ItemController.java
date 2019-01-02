@@ -11,12 +11,12 @@ public class ItemController extends AbstractController{
 
 
     @CrossOrigin
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/{listId}",method = RequestMethod.POST)
     @ResponseBody
-    public Liste getItemsFromList(@RequestBody RestItem item) {
+    public Liste getItemsFromList(@PathVariable("listId") Long listId,@RequestBody RestItem item) {
         item.setId(null);
         Item i = new Item(item);
-        return customRepo.addItemToList(item.getListId(), i);
+        return customRepo.addItemToList(listId, i);
     }
 
     @CrossOrigin
