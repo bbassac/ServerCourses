@@ -11,7 +11,7 @@ public class ItemController extends AbstractController{
 
 
     @CrossOrigin
-    @RequestMapping(value = "/{listId}",method = RequestMethod.POST)
+    @RequestMapping(value = "/{listId}",method = RequestMethod.POST,consumes = "application/json;UTF-8")
     @ResponseBody
     public Liste getItemsFromList(@PathVariable("listId") Long listId,@RequestBody RestItem item) {
         item.setId(null);
