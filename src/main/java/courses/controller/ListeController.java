@@ -18,7 +18,7 @@ public class ListeController extends AbstractController{
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/",method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public Collection addListe(@RequestBody RestListe list) {
         list.setId(null);
@@ -28,7 +28,7 @@ public class ListeController extends AbstractController{
 
 
     @CrossOrigin
-    @RequestMapping(value = "/",method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT)
     @ResponseBody
     public Collection updateList(@RequestBody RestListe list) {
         Liste l = new Liste(list);
