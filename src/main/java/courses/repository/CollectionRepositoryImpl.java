@@ -112,7 +112,7 @@ public class CollectionRepositoryImpl implements CollectionRepositoryCustom {
     }
 
     @Override
-    public Liste updateItem(Long listId, Item i) {
+    public Liste updateItem(Item i) {
 
         Item dbItem = getItem(i.getId());
         dbItem.setNom(i.getNom());

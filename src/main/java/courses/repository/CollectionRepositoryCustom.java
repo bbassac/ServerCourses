@@ -25,5 +25,5 @@ public interface CollectionRepositoryCustom {
 
     Liste removeItemToList(Long listId, Item i);
 
-    Liste updateItem(Long listId, Item i);
+    Liste updateItem(Item i);
 }

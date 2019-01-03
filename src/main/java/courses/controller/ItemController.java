@@ -20,12 +20,12 @@ public class ItemController extends AbstractController{
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/{listId}",method = RequestMethod.PUT,consumes = "application/json;UTF-8")
+    @RequestMapping(method = RequestMethod.PUT,consumes = "application/json;UTF-8")
     @ResponseBody
-    public Liste updateItem(@PathVariable("listId") Long listId, @RequestBody RestItem item) {
+    public Liste updateItem(@RequestBody RestItem item) {
 
         Item i = new Item(item);
-        return customRepo.updateItem(listId, i);
+        return customRepo.updateItem(i);
     }
 
     @CrossOrigin
