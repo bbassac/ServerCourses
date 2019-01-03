@@ -111,6 +111,18 @@ public class CollectionRepositoryImpl implements CollectionRepositoryCustom {
         return getListe(listId);
     }
 
+    @Override
+    public Liste updateItem(Long listId, Item i) {
+
+        Item dbItem = getItem(i.getId());
+        dbItem.setNom(i.getNom());
+        dbItem.setQuantite(i.getQuantite());
+        dbItem.setDone(i.isDone());
+
+        entityManager.merge(dbItem);
+        return dbItem.getListe();
+    }
+
 
     private void createEmptyCollection() {
         LogUtils.warn("Creating empty collection");
