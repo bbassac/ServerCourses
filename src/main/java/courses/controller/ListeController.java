@@ -28,7 +28,7 @@ public class ListeController extends AbstractController{
 
 
     @CrossOrigin
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT,consumes = "application/json;UTF-8")
     @ResponseBody
     public Collection updateList(@RequestBody RestListe list) {
         Liste l = new Liste(list);
