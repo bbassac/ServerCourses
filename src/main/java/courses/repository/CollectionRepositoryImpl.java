@@ -49,13 +49,13 @@ public class CollectionRepositoryImpl implements CollectionRepositoryCustom {
     @Override
     public Collection effacerListe(Long id) {
         Liste dbListe = getListe(id);
-        if(dbListe !=null){
+        if(dbListe !=null && !dbListe.isTemplate()){
             LogUtils.warn("Deleting liste id "+ id);
             dbListe.getCollection().getListes().remove(dbListe);
             entityManager.remove(dbListe);
             entityManager.merge(dbListe.getCollection());
         }else{
-            LogUtils.warn("Liste id "+ id + " Not found");
+            LogUtils.warn("Liste id "+ id + " Not found or is a template");
         }
         return getCollection();
     }
