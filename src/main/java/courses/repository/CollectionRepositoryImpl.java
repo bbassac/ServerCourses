@@ -97,16 +97,16 @@ public class CollectionRepositoryImpl implements CollectionRepositoryCustom {
     }
 
     @Override
-    public Liste removeItemToList(Long listId, Item i) {
+    public Liste removeItemToList(Long listId, Long  itemId) {
 
-        Item dbItem = getItem(i.getId());
+        Item dbItem = getItem(itemId);
         if(dbItem !=null){
-            LogUtils.warn("Deleting item id "+ i.getId());
+            LogUtils.warn("Deleting item id "+ itemId);
             dbItem.getListe().getItems().remove(dbItem);
             entityManager.remove(dbItem);
             entityManager.merge(dbItem.getListe());
         }else{
-            LogUtils.warn("Item  "+ i.getId() + " from list " + listId + " Not found");
+            LogUtils.warn("Item  "+ itemId + " from list " + listId + " Not found");
         }
         return getListe(listId);
     }

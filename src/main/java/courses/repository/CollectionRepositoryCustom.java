@@ -23,7 +23,7 @@ public interface CollectionRepositoryCustom {
 
     Liste addItemToList(Long listId, Item item);
 
-    Liste removeItemToList(Long listId, Item i);
+    Liste removeItemToList(Long listId, Long i);
 
     Liste updateItem(Item i);
 }
