@@ -29,11 +29,11 @@ public class ItemController extends AbstractController{
     }
 
     @CrossOrigin
-    @RequestMapping(method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{listId}",method = RequestMethod.DELETE,consumes = "application/json;UTF-8")
     @ResponseBody
-    public Liste removeItemsFromList(@RequestBody RestItem item) {
+    public Liste removeItemsFromList(@PathVariable("listId") Long listId, @RequestBody RestItem item) {
         Item i = new Item(item);
-        return customRepo.removeItemToList(item.getListId(), i);
+        return customRepo.removeItemToList(listId, i);
     }
 
 }
